@@ -13,6 +13,7 @@
       --background1: #ffffff;
       --background2: #e2e2ee;
       --grid-size: 16;
+      --grid-gap: 2px;
       --box-shadow: 26px 35px 126px -31px rgba(0,0,0,0.62); 
     }
     body {
@@ -23,7 +24,7 @@
     }
     #container {
       display: grid;
-      grid-gap: 2px;
+      grid-gap: var(--grid-gap);
       padding: 2px;
       grid-template-columns: repeat(var(--grid-size), 1fr);
       grid-template-rows: repeat(var(--grid-size), 1fr);
@@ -48,17 +49,51 @@
       cursor: pointer;
       box-shadow: 20px 8px 102px -5px rgba(0,0,0,0.62); 
     }
-    
+    #controls {
+      width: 500px;
+      padding: 0 40px 0;
+      margin: 0 auto;
+    }
+    #input {
+      margin-top: 16px;
+      border: 1px solid var(--color1);
+      font-size: 16px;
+      color: var(--color1);
+      width: 30px;
+      text-align: center;
+    }
+    #size-input {
+      opacity: 0;
+      transform: translateY(-100%);
+      transition: all .3s ease-in-out;
+    }
+    #controls:hover #size-input {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+    p {
+      color: var(--color1);
+      font-size: 16px;
+      font-family: system-ui;
+      margin: 0;
+    }
   </style>
   <div id="container"></div>
-  <button onclick="drawGrid()">reset</button>
+  <div id="controls">
+    <button onclick="drawGrid()">reset</button>
+    <div id="size-input">
+        <input  id="input" type="text" value="12">
+        <p>grid size</p>
+    </div>
+  </div>
   <script>
     const container = document.getElementById('container')
-    const gridSize = 12
-
-    document.body.style.setProperty('--grid-size', gridSize)
+    const input = document.getElementById('input')
     
     const drawGrid = () => {
+      let gridSize = input.value || 12
+      document.body.style.setProperty('--grid-size', gridSize)
+      document.body.style.setProperty('--grid-gap', gridSize > 32 ? 0 : '2px')
       container.innerHTML = ''
       for(let i = gridSize**2; i > 0; i--) {
         const square = document.createElement('div')
