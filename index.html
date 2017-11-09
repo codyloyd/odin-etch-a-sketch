@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <style>
+    :root {
+      --color1: #50514F;
+      --color2: #F25F5C;
+      --color3: #FFE066;
+      --background1: #ffffff;
+      --background2: #e2e2ee;
+      --grid-size: 16;
+      --box-shadow: 26px 35px 126px -31px rgba(0,0,0,0.62); 
+    }
+    body {
+      background: linear-gradient(120deg, var(--background1) 0%, var(--background2) 100%);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      text-align: center;
+    }
+    #container {
+      display: grid;
+      grid-gap: 2px;
+      padding: 2px;
+      grid-template-columns: repeat(var(--grid-size), 1fr);
+      grid-template-rows: repeat(var(--grid-size), 1fr);
+      margin: 60px auto 30px;
+      width: 500px;
+      height: 500px;
+      border: var(--color1) solid 8px;
+      box-shadow: var(--box-shadow);
+    }
+    .square {
+      transition: all .2s;
+      border: var(--color1) solid 1px;
+      background: var(--color2);
+      cursor: crosshair;
+    }
+    button {
+      background: var(--background2);
+      color: var(--color1);
+      padding: 8px 26px;
+      font-size: 26px;
+      border: 2px solid var(--color1);
+      cursor: pointer;
+      box-shadow: 20px 8px 102px -5px rgba(0,0,0,0.62); 
+    }
+    
+  </style>
+  <div id="container"></div>
+  <button onclick="drawGrid()">reset</button>
+  <script>
+    const container = document.getElementById('container')
+    const gridSize = 12
+
+    document.body.style.setProperty('--grid-size', gridSize)
+    
+    const drawGrid = () => {
+      container.innerHTML = ''
+      for(let i = gridSize**2; i > 0; i--) {
+        const square = document.createElement('div')
+        square.classList.add('square')
+        container.appendChild(square)
+      }
+
+      const allSquares = document.querySelectorAll('.square')
+
+      allSquares.forEach(s => {
+        s.addEventListener('mouseover', e => {
+          e.target.style.background = `var(--color3)`
+        })
+      })
+    }
+    drawGrid()
+  </script>
+</body>
+</html>
