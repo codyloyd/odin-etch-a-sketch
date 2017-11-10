@@ -64,7 +64,7 @@
     }
     #size-input {
       opacity: 0;
-      transform: translateY(-50%);
+      transform: translateY(-100%);
       transition: all .3s ease-in-out;
     }
     #controls:hover #size-input {
@@ -87,29 +87,29 @@
     </div>
   </div>
   <script>
-    const container = document.getElementById('container')
-    const input = document.getElementById('input')
-    
+    const container = document.getElementById("container");
+    const input = document.getElementById("input");
+
     const drawGrid = () => {
-      let gridSize = input.value || 12
-      document.body.style.setProperty('--grid-size', gridSize)
-      document.body.style.setProperty('--grid-gap', gridSize > 32 ? 0 : '2px')
-      container.innerHTML = ''
-      for(let i = gridSize**2; i > 0; i--) {
-        const square = document.createElement('div')
-        square.classList.add('square')
-        container.appendChild(square)
+      let gridSize = input.value || 12;
+      document.body.style.setProperty("--grid-size", gridSize);
+      document.body.style.setProperty("--grid-gap", gridSize > 32 ? 0 : "2px");
+      container.innerHTML = "";
+      for (let i = gridSize ** 2; i > 0; i--) {
+        const square = document.createElement("div");
+        square.classList.add("square");
+        container.appendChild(square);
       }
 
-      const allSquares = document.querySelectorAll('.square')
+      const allSquares = document.querySelectorAll(".square");
 
       allSquares.forEach(s => {
-        s.addEventListener('mouseover', e => {
-          e.target.style.background = `var(--color3)`
-        })
-      })
-    }
-    drawGrid()
+        s.addEventListener("mouseover", e => {
+          e.target.style.background = `var(--color3)`;
+        });
+      });
+    };
+    drawGrid();
   </script>
 </body>
 </html>
